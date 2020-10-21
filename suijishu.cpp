@@ -4,41 +4,46 @@ using namespace std;
 int main()
 {
 	int N,M;
-	int i,small;
-	int a[100],b[100];
+	int i,small,j;
+	int a[105],b[105];
 	
-	scanf("%d",&N);
+	cin>>N;
+	if(N<=0)
+	cout<<"error"<<endl;
 	for(i=0;i<N;i++)
 	{
-		scanf("%d",&a[i]);
+		cin>>a[i];
 	}
 	
 	for(i=0;i<N;i++)
 	{
-		if(a[i]>a[i+1])
-		small=a[i];
-		a[i]=a[i+1];
-		a[i+1]=small;
-	}
-	for(i=0;i<N;i++)
+	for(j=i+1;j<N;j++)
 	{
-			if(a[i]=a[i+1])
+		if(a[i]>a[j])
+		{
+		small=a[j];
+		a[j]=a[i];
+		a[i]=small;
+		}
+		
+	}
+	}
+	
+	M=1;
+	b[0]=a[0];
+	for(i=1;i<N;i++)
+	{
+			if(a[i]!=a[i-1])
 			{
-				for(i=i+1;i<N;i++)
-				a[i+1]=a[i+2];
+				b[M]=a[i];
+				M++;
 			}
 	}
 	
-	M=0;
-	for(i=0;i<N;i++)
-	{
-		if(a[i]!='\0')
-		M++;
-	}
-	printf("%d\n",M);
+	cout<<M<<endl;
 	for(i=0;i<M;i++)
 	{
-		printf("%d\n",a[i]);
+		cout<<b[i]<<" ";
 	}
 	return 0;
 }
