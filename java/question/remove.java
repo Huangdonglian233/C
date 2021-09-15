@@ -8,7 +8,7 @@ import java.util.Arrays;
 //来源：力扣（LeetCode）
 //链接：https://leetcode-cn.com/problems/remove-duplicates-from-sorted-array
 //著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
-public class remove {
+public class Remove {
     public static void main(String[] args) {
         int[] nums={0,0,1,1,1,2,2,3,3,4};
         int sum=removeDuplicates(nums);
