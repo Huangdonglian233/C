@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+    //去除重复数组
+        /* var arr=[2,0,6,1,77,0,52,0,25,7];
+        var newArr=[];
+        for(var i=0,j=0;i<arr.length;i++){
+            if(arr[i]!=0){
+                newArr[j]=arr[i];
+                j++;
+            }
+        }
+        console.log(newArr);*/
+        //反转数组
+        /*var arr=['red','green','blue','pink','purple'];
+        var newArr=[];
+        for(var i=0,j=arr.length-1;i<arr.length;i++,j--){
+            newArr[i]=arr[j];
+        }
+        console.log(newArr);*/
+        //冒泡排序
+        /*var arr=[2,0,6,1,77,0,52,0,25,7];
+        for(var i=0;i<arr.length;i++){
+            for(var j=0;j<i;j++){
+                if(arr[i]>arr[j]){
+                    var temp=arr[i];
+                    arr[i]=arr[j];
+                    arr[j]=temp;
+                }
+            }
+        }
+        console.log(arr);*/
+        //在函数内部未声明直接赋值的变量是全局变量
+        //全局变量在浏览器关闭的时候才会销毁
+        //局部变量程序执行完毕以后就会被销毁
+        //javaScript没有块级作用域 es6新增
+        //块级作用域{}
+        //作用于链原则：就近原则
+        function f1(){
+            var num=123;
+            function f2(){
+                console.log(num);
+            }
+            f2();
+        }
+        var num=456;
+        f1();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

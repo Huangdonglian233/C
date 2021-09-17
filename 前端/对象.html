@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*var obj={
+            uname:'张三',
+            age:18,
+            sex:'男',
+        };*/
+        /*var obj=new Object();
+        obj.uname='张三';
+        obj.age=18;
+        obj.sex='男';*/
+        //构造函数
+        /*function Fn(uname,age,sex){
+            this.uname=uname;
+            this.age=age;
+            this.sex=sex;
+        }
+        var ldh=new Fn('刘德华',18,'男');
+        console.log(ldh.uname);                                                      
+        //构造函数不需要return便可以返回结果 属性和方法前面必须添加this
+        for(var k in ldh){
+            console.log(k);
+            console.log(ldh[k]);
+        }//对象的循环*/
+        /*var computer={
+            color:'grey',
+            weight:3,
+            brand:'联想',
+            model:'Y406F',
+            watchMovie:function(){
+                console.log('watch movie');
+            },
+            listenMusic:function(){
+                console.log('listen to music');
+            },
+            playGames:function(){
+                console.log('play games');
+            },
+            code:function(){
+                console.log('code');
+            }
+        }
+        for(var k in computer){
+            console.log(computer[k]);
+        }
+        computer.listenMusic();*/
+        /*var button={
+            color:'red',
+            width:'1px',
+            height:'5px',
+            onlick:function(){
+                this.color='blue';
+            }
+        }
+        button.onlick();
+        for(var k in button){
+            console.log(button[k]);
+        }*/
+        /*var car={
+            weight:100,
+            color:'white',
+            brand:'大众',
+            manned:function(){
+                console.log('manned');
+            },
+            laden:function(){
+                console.log('laden');
+            },
+            plough:function(){
+                console.log('plough');
+            }
+        }
+        for(var k in car){
+            console.log(car[k]);
+        }*/
+        /*var newArr=[];
+        function reverseList(arr){
+            for(var i=0,j=arr.length-1;i<arr.length;i++,j--){
+                newArr[i]=arr[i];
+            }
+        }
+        var arr=[1,2,3,4,5];
+        reverseList(arr);
+        console.log(newArr[0]);*/
+        /*function Fn(arr){
+            for(var i=0;i<arr.length;i++){
+                for(var j=0;j<i;j++){
+                    if(arr[j]>arr[i]){
+                        var temp=arr[i];
+                        arr[i]=arr[j];
+                        arr[j]=temp;
+                    }
+                }
+            }
+        }
+        var arr=[2,1,9,10,1];
+        Fn(arr);
+        console.log(arr);*/
+        var number=0;
+        
+        do{
+            var select=prompt('欢迎使用简易计算器:'+'\n'+'1.加法运算'+'\n'+'2.减法运算'+'\n'+'3.乘法运算'+'\n'+'4.除法运算'+'\n'+'5.退出');
+            switch(select){
+                case '1':
+                    var sum1=prompt("请输入第一个数：");
+                    var sum2=prompt("请输入第二个数：");
+                    var number=parseFloat(sum1)+parseFloat(sum2);
+                    alert('运算的结果为：'+number);
+                    break;
+                case '2':
+                    var sum1=prompt("请输入第一个数：");
+                    var sum2=prompt("请输入第二个数：");
+                    var number=parseFloat(sum1)-parseFloat(sum2);
+                    alert('运算的结果为：'+number);
+                    break;
+                case '3':
+                    var sum1=prompt("请输入第一个数：");
+                    var sum2=prompt("请输入第二个数：");
+                    var number=parseFloat(sum1)*parseFloat(sum2);
+                    alert('运算的结果为：'+number);
+                    break;
+                case '4':
+                    var sum1=prompt("请输入第一个数：");
+                    var sum2=prompt("请输入第二个数：");
+                    var number=parseFloat(sum1)/parseFloat(sum2);
+                    alert('运算的结果为：'+number);
+                    break;
+                case '5':
+                    alert('已退出！');
+                    break;
+            }
+        }while(select!=='5');
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
