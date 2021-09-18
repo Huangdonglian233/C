@@ -1,17 +1,23 @@
 package com.huang.os;
 
-import java.sql.Time;
-
 public class Task {
     private String name;
+    private int queueTime;//任务进入作业井时间
     private int taskIn;//任务进入时间
     private int startTime;//任务开始时间
-    private int runTime;//任务运行时间
+    private int runTime;//任务目前运行时间
     private int finishTime;//任务完成时间
     private int tTime;//周转时间
+
+
+    public void setAvgTime(int avgTime) {
+        this.avgTime = avgTime;
+    }
+
     private int needTime;//需要时间
     private double wTime;//带权周转时间
-    private String status;
+    private int status;//0表示等待 1表示运行 -1表示未提交
+    private int avgTime;
     public Task(String name, int taskIn, int needTime) {
         this.name = name;
         this.taskIn = taskIn;
@@ -21,8 +27,13 @@ public class Task {
         this.finishTime=0;
         this.wTime = 0;
         this.runTime=0;
-        this.status = "WAIT";
+        this.status = -1;
     }
+
+    public int getQueueTime() {
+        return queueTime;
+    }
+
 
     public String getName() {
         return name;
@@ -32,16 +43,13 @@ public class Task {
         return taskIn;
     }
 
-    public int getStartTime() {
-        return startTime;
-    }
 
     public void setStartTime(int startTime) {
         this.startTime = startTime;
     }
 
     public int getRunTime() {
-        return runTime;
+        return runTime-this.startTime;
     }
 
     public int getFinishTime() {
@@ -49,7 +57,8 @@ public class Task {
     }
 
     public int gettTime() {
-        return this.runTime+this.startTime-this.taskIn;
+        int temp=this.runTime+this.startTime-this.taskIn;
+        return temp>0?temp :0;
     }
 
     public int getNeedTime() {
@@ -57,44 +66,20 @@ public class Task {
     }
 
     public double getwTime() {
-        if(this.status=="FINISH")
+        if(this.status==1)
         return this.tTime/this.needTime;
         else return 0;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setTaskIn(int taskIn) {
-        this.taskIn = taskIn;
-    }
-
-    public void setRunTime(int runTime) {
-        this.runTime = runTime;
     }
 
     public void setFinishTime(int finishTime) {
         this.finishTime = finishTime;
     }
 
-    public void settTime(int tTime) {
-        this.tTime = tTime;
-    }
-
-    public void setNeedTime(int needTime) {
-        this.needTime = needTime;
-    }
-
-    public void setwTime(double wTime) {
-        this.wTime = wTime;
-    }
-
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
