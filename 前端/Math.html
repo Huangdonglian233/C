@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function getRandom(min,max) {
+            return Math.floor(Math.random()*(max-min)+min);
+        }
+        var num=getRandom(1,10);
+        var i=0;
+        do{
+            var userNum=prompt("请输入您猜的数字:");
+            if(parseInt(userNum)>num){
+                alert("猜大了");
+            }else if(parseInt(userNum)<num){
+                alert("猜小了");
+            }else{
+                alert("猜对了");
+                break;
+            }
+            i++;
+        }while(userNum!=num&&i<10);
+        if(i==10){
+            alert("猜奖机会已用完！");
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
