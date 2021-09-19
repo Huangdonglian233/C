@@ -9,10 +9,12 @@ public class Task {
     private int finishTime;//任务完成时间
     private int tTime;//周转时间
     private int needTime;//需要时间
-    private double wTime;//带权周转时间
+    private float wTime;//带权周转时间
     private int status;//0表示等待 1表示运行 -1表示未提交 2表示已完成
     private int avgTime;
+    private int pause;
     private int pauseTime;
+    private int restartTime;
 
     public Task(String name, int taskIn, int needTime) {
         this.name = name;
@@ -25,7 +27,17 @@ public class Task {
         this.wTime = 0;
         this.runTime=0;
         this.status = -1;
-        this.pauseTime=0;
+        this.pause=0;
+        this.pauseTime=1;
+        this.restartTime=0;
+    }
+
+    public int getPause() {
+        return pause;
+    }
+
+    public void setPause(int pause) {
+        this.pause = pause;
     }
 
     public int getPauseTime() {
@@ -47,7 +59,7 @@ public class Task {
         this.tTime = tTime;
     }
 
-    public void setwTime(double wTime) {
+    public void setwTime(float wTime) {
         this.wTime = wTime;
     }
 
@@ -78,11 +90,11 @@ public class Task {
     }
 
     public int getFinishTime() {
-        return finishTime;
+        return finishTime>1060?finishTime-1060+1100:finishTime;
     }
 
     public int gettTime() {
-        int temp=this.runTime+this.startTime-this.taskIn;
+        int temp=this.finishTime-this.taskIn;
         return temp>0?temp :0;
     }
 
@@ -92,7 +104,7 @@ public class Task {
 
     public double getwTime() {
         if(this.status==2)
-        return this.tTime/this.needTime;
+        return  (double)this.gettTime()/this.getNeedTime();
         else return 0;
     }
 
