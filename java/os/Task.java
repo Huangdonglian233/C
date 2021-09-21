@@ -11,7 +11,6 @@ public class Task {
     private int needTime;//需要时间
     private float wTime;//带权周转时间
     private int status;//0表示等待 1表示运行 -1表示未提交 2表示已完成
-    private int avgTime;
     private int pause;
     private int pauseTime;
     private int restartTime;
@@ -40,9 +39,6 @@ public class Task {
         this.pause = pause;
     }
 
-    public int getPauseTime() {
-        return pauseTime;
-    }
 
     public void setPauseTime(int pauseTime) {
         this.pauseTime = pauseTime;
@@ -50,9 +46,6 @@ public class Task {
 
     public void setQueueTime(int queueTime) {
         this.queueTime = queueTime;
-    }
-    public void setAvgTime(int avgTime) {
-        this.avgTime = avgTime;
     }
 
     public void settTime(int tTime) {
@@ -63,9 +56,6 @@ public class Task {
         this.wTime = wTime;
     }
 
-    public void setNeedTime(int needTime) {
-        this.needTime = needTime;
-    }
 
     public int getQueueTime() {
         return queueTime;
@@ -86,7 +76,7 @@ public class Task {
     }
 
     public int getRunTime() {
-        return runTime;
+        return this.runTime;
     }
 
     public int getFinishTime() {

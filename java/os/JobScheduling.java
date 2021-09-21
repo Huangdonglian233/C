@@ -46,18 +46,18 @@ public class JobScheduling {
         canRun();
         int temp=0;
         while (!isDone()){
+
             canRun();
             temp=arr.size();
             int key = shouldRun();
             if (key != -1) {
                 if (!arr.contains(key))
                     arr.add(key);
-                canRun();
                 shortJob(arr);
                 if(arr.size()==1)
                     continue;
             }
-            shortJob(arr);
+//            shortJob(arr);
             if(temp>arr.size()){
                 continue;
             }
@@ -67,6 +67,7 @@ public class JobScheduling {
             Print();
             timeCount++;
             System.out.println(timeCount);
+            shortJob(arr);
         }
     }
     public double getAllTime(){
@@ -184,7 +185,10 @@ public class JobScheduling {
                 if(t!=0){
                     tasks[temp].setRunTime(t+timeCount-restartTime);
                 }else {
-                    tasks[temp].setRunTime(timeCount - restartTime);
+                    if(restartTime!=0)
+                        tasks[temp].setRunTime(timeCount - restartTime);
+                    else
+                        tasks[temp].setRunTime(timeCount-tasks[temp].getStartTime());
                 }
                 tasks[temp].setQueueTime(tasks[temp].getNeedTime() - tasks[temp].getRunTime());
                 if (tasks[temp].getQueueTime() == 0) {
@@ -199,14 +203,16 @@ public class JobScheduling {
                 if(tasks[temp1].getStartTime()==0)
                     tasks[temp1].setStartTime(timeCount);
                 tasks[temp1].setStatus(1);
+                if(tasks[temp1].getStatus()==1&&tasks[temp2].getStatus()==1){
+                    tasks[temp1].setRunTime(timeCount-tasks[temp1].getStartTime());
+
+                }
                 if(tasks[temp2].getStatus()==1) {
-                    tasks[temp2].setRunTime(timeCount - tasks[temp2].getStartTime());
                     tasks[temp2].setQueueTime(tasks[temp2].getNeedTime() - tasks[temp2].getRunTime());
                     tasks[temp2].setPauseTime(timeCount);
                     tasks[temp2].setPause(1);
                 }
                 tasks[temp2].setStatus(0);
-                tasks[temp1].setRunTime(timeCount-tasks[temp1].getStartTime());
                 tasks[temp1].setQueueTime(tasks[temp1].getNeedTime()-tasks[temp1].getRunTime());
                 if(tasks[temp1].getQueueTime()==0) {
                     setFinishTime(tasks[temp1]);
@@ -221,7 +227,11 @@ public class JobScheduling {
                     tasks[temp1].setPause(1);
                 }
                 tasks[temp2].setStatus(1);
+//                if(tasks[temp1].getStatus()==1&&tasks[temp2].getStatus()==1&&tasks[temp1].getPause()==1){
+//                    tasks[temp1].setRunTime(timeCount-tasks[temp1].getStartTime());
+//                }
                 tasks[temp1].setStatus(0);
+//                tasks[temp1].setRunTime(timeCount-tasks[temp1].getStartTime());
                 tasks[temp2].setRunTime(timeCount-tasks[temp2].getStartTime());
                 tasks[temp2].setQueueTime(tasks[temp2].getNeedTime()-tasks[temp2].getRunTime());
                 if(tasks[temp2].getQueueTime()==0) {
