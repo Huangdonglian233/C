@@ -1,7 +1,7 @@
 package com.huang.question;
 
 import java.util.*;
-
+//思路 双向链表实现 最不常用的在尾部 最常用的在头部
 //运用你所掌握的数据结构，设计和实现一个  LRU (最近最少使用) 缓存机制 。
 //实现 LRUCache 类：
 //
@@ -40,26 +40,26 @@ class LRUCache {
     private DLinkedNode head,tail;
 
     public static void main(String[] args) {
-//        LRUCache lruCache=new LRUCache(2);
-//        lruCache.put(2,1);
+        LRUCache lruCache=new LRUCache(2);
+        lruCache.put(2,1);
 //        System.out.println("1"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        lruCache.put(2,2);
+        lruCache.put(2,2);
 //        System.out.println("2"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        System.out.println(lruCache.get(2));
+        System.out.println(lruCache.get(2));
 //        System.out.println("3"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        lruCache.put(1,1);
+        lruCache.put(1,1);
 //        System.out.println("4"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        lruCache.put(4,1);
+        lruCache.put(4,1);
 //        System.out.println("5"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        System.out.println(lruCache.get(2));
+        System.out.println(lruCache.get(2));
 //        System.out.println("6"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
-//        System.out.println(lruCache.get(1));
+        System.out.println(lruCache.get(1));
 //        System.out.println("7"+lruCache.map);
 //        System.out.println(lruCache.flagMap);
 //        System.out.println(lruCache.get(3));
@@ -121,7 +121,7 @@ class LRUCache {
         hNext.pre=node;
     }
 
-    public DLinkedNode removeToTail(){
+    public DLinkedNode removeTail(){
         DLinkedNode node=tail.pre;
         DLinkedNode tPre=tail.pre.pre;
         tail.pre=tPre;
@@ -156,7 +156,7 @@ class LRUCache {
             addToHead(newNode);
             ++size;
             if(size>capacity){
-                DLinkedNode tail=removeToTail();
+                DLinkedNode tail=removeTail();
                 cache.remove(tail.key);
                 --size;
             }
