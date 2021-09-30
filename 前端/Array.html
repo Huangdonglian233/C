@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        function reverse(arr){
+        /*function reverse(arr){
             if(arr instanceof Array){
                 var newArr=[];
                 for(var i=0;i<arr.length;i++){
@@ -20,7 +20,18 @@
         var arr=[1,2,3];
         var obj={};
         console.log(reverse(arr));
-        console.log(reverse(obj));
+        console.log(reverse(obj));*/
+        function foo(something){
+            this.a=something;
+        }
+        var obj={};
+        var bar=foo.bind(obj);
+        bar(2);
+        console.log(obj.a);
+
+        var baz=new bar(3);
+        console.log(obj.a);
+        console.log(baz.a);
     </script>
 
 </head>
