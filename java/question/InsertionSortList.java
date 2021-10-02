@@ -55,28 +55,4 @@ public class InsertionSortList {
         }
         return preHead.next;
     }
-
-    public static ListNode removeNode(ListNode pre){
-        ListNode node=pre.next;
-        pre.next=pre.next.next;
-        return node;
-    }
-
-    public static void insertList(ListNode preHead,ListNode node){
-        ListNode cur=preHead;
-        while (cur.next!=null) {
-            if (node.val < cur.next.val) {
-                ListNode succ = cur.next;
-                cur.next = node;
-                node.next = succ;
-                break;
-            } else {
-                cur = cur.next;
-            }
-        }
-        if(cur.next==null){
-            cur.next=node;
-            node.next=null;
-        }
-    }
 }
