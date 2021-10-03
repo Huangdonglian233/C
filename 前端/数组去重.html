@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr=['c','a','b','c','q','s','f','f','a','c','s'];
+        var newArr=[];
+        function unique(a,b){
+            for(var i=0;i<a.length;i++){
+                if(b.indexOf(a[i])==-1){
+                    b.push(a[i]);
+                }
+            }
+        }
+        unique(arr,newArr);
+        console.log(newArr);
+        //将数组转化为字符串
+        console.log(arr.toString());
+        var arr1=['green','pink','red'];
+        console.log(arr1.join('-'));//join表示字符串指定分隔符
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

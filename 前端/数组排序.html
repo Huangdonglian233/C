@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var arr=["pink","red","blue"];
+        arr.reverse();
+        console.log(arr);
+        var arr1=[3,13,4,7,1,77];
+        //arr1.sort();
+        //console.log(arr1);
+        arr1.sort(function(a,b){
+            return a-b;//升序排列
+        });
+        console.log(arr1);
+        //返回元素索引 只返回第一个满足元素的索引号
+        console.log(arr1.indexOf(77));
+         console.log(arr1.lastIndexOf(4));//从后往前查找
+    </script>
+</body>
+</html>
