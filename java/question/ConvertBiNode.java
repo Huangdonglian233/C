@@ -1,4 +1,15 @@
 package com.huang.question;
+
+//二叉树数据结构TreeNode可用来表示单向链表（其中left置空，right为下一个链表节点）。实现一个方法，把二叉搜索树转换为单向链表，要求依然符合二叉搜索树的性质，转换操作应是原址的，也就是在原始的二叉搜索树上直接修改。
+//
+//返回转换后的单向链表的头节点。
+//
+//注意：本题相对原题稍作改动
+//
+//来源：力扣（LeetCode）
+//链接：https://leetcode-cn.com/problems/binode-lcci
+//著作权归领扣网络所有。商业转载请联系官方授权，非商业转载请注明出处。
+
 class TreeNode{
     int val;
     TreeNode left;
@@ -28,25 +39,20 @@ public class ConvertBiNode {
         }
     }
     private static TreeNode root1=null;
-    private static TreeNode newRight=root1;
+    private static TreeNode pre=null;
     public static TreeNode convertBiNode(TreeNode root) {
-        if (root == null) {
+        if(root==null){
             return null;
         }
-        if(root.right==null&&root.left==null){
-            newRight=new TreeNode(root.val);
-            newRight=newRight.right;
+        convertBiNode(root.left);
+        if(root1==null){
+            root1=root;
+        }else{
+            pre.right=root;
         }
-        if(root.left != null){
-           convertBiNode(root.left);
-            newRight = new TreeNode(root.left.val);
-            newRight=newRight.right;
-        }
-        if(root.right != null){
-            convertBiNode(root.right);
-            newRight = new TreeNode(root.right.val);
-            newRight=newRight.right;
-        }
+        pre=root;
+        root.left=null;
+        convertBiNode(root.right);
         return root1;
     }
 }
