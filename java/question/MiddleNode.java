@@ -18,11 +18,10 @@ public class MiddleNode {
     public static ListNode middleNode(ListNode head) {
         ArrayList<ListNode> nodeArrayList=new ArrayList<>();
         ListNode node=head;
-        while (node!=null){
+        while (node!=null) {
             nodeArrayList.add(node);
-            node=node.next;
+            node = node.next;
         }
-        //node.next=null;
         int len=nodeArrayList.size();
         int position=len/2;
         return nodeArrayList.get(position);
