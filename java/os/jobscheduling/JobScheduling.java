@@ -1,4 +1,5 @@
-package com.huang.os;
+package com.huang.os.jobscheduling;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -163,7 +164,7 @@ public class JobScheduling {
             task.setwTime(task.gettTime()/task.getNeedTime());
             restartTime=timeCount;
     }
-    public void shortJob(List<Integer> list){
+    public void shortJob(List<Integer> list){   //短时间优先
         if (list.size()<1){
             list.add(shouldRun());
         }

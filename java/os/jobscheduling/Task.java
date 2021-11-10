@@ -1,4 +1,4 @@
-package com.huang.os;
+package com.huang.os.jobscheduling;
 
 public class Task {
     private String name;
