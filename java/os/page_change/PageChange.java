@@ -28,22 +28,16 @@ public class PageChange {
         max = scanner.nextInt();
         System.out.println("请输入要使用的算法：（OPT,FIFO,LRU)");
         al = scanner.next();
-        List<Integer> result;
-        if(al.equals("OPT")||al.equals("opt")){
-            while (judge()){
+        List<Integer> result = null;
+        while (judge()) {
+            if (al.equals("OPT") || al.equals("opt")) {
                 result = optimal();
-                print(result);
-            }
-        }else if(al.equals("FIFO")||al.equals("fifo")){
-            while (judge()){
+            } else if (al.equals("FIFO") || al.equals("fifo")) {
                 result = fifo();
-                print(result);
-            }
-        }else if(al.equals("LRU")||al.equals("lru")) {
-            while (judge()){
+            } else if (al.equals("LRU") || al.equals("lru")) {
                 result = lru();
-                print(result);
             }
+            print(result);
         }
     }
 
