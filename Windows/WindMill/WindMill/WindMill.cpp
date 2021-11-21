@@ -12,7 +12,7 @@
 HINSTANCE hInst;                                // 当前实例
 WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
 WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名
-int nNum = 0, nMaxNum = 20;
+int nNum = 0, nMaxNum = 20;//nMaxNum为叶片循环一周绘图的次数，nNum记录了当前的次数
 
 // 此代码模块中包含的函数的前向声明:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -76,8 +76,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbClsExtra     = 0;
     wcex.cbWndExtra     = 0;
     wcex.hInstance      = hInstance;
-    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDMILL));
-    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
+    wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_WINDMILL));//窗口缺省图标
+    wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);//窗口采用箭头光标
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_WINDMILL);
     wcex.lpszClassName  = szWindowClass;
@@ -99,7 +99,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 将实例句柄存储在全局变量中
-   HWND hWnd = CreateWindowW(szWindowClass, L"旋转的风车", WS_OVERLAPPEDWINDOW,
+   HWND hWnd = CreateWindowW(szWindowClass, L"WindMill", WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, 600, 450, nullptr, nullptr, hInstance, nullptr);
    if (!hWnd)
    {
@@ -124,12 +124,12 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
-    HDC hdc;
-    HBRUSH hbrush;
-    HPEN hpen;
-    PAINTSTRUCT ps;
+    HDC hdc;//定义设备环境句柄
+    HBRUSH hbrush;//定义画刷句柄
+    HPEN hpen;//定义画笔句柄
+    PAINTSTRUCT ps;//定义包含绘图信息的结构体变量
 
-    int nCentrex, nCentrey;
+    int nCentrex, nCentrey;//定义3个叶片的圆心坐标
     double fAngle;
 
     switch (message)
@@ -151,56 +151,57 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
-    case WM_PAINT:
+    case WM_PAINT://处理绘图消息
         {
-            hdc = BeginPaint(hWnd, &ps);
+            hdc = BeginPaint(hWnd, &ps);//获得设备环境指针
             // TODO: 在此处添加使用 hdc 的任何绘图代码...
-            SetMapMode(hdc, MM_ANISOTROPIC);
-            SetWindowExtEx(hdc, 400, 300, NULL);
-            SetViewportExtEx(hdc, 600, 450, NULL);
-            SetViewportOrgEx(hdc, 300, 200, NULL);
+            SetMapMode(hdc, MM_ANISOTROPIC);//设置映射模式
+            SetWindowExtEx(hdc, 400, 300, NULL);//设置窗口区域
+            SetViewportExtEx(hdc, 600, 450, NULL);//设置视口区域
+            SetViewportOrgEx(hdc, 300, 200, NULL);//设置视口原点坐标
          
             hpen = (HPEN)GetStockObject(BLACK_PEN);//绘制外圆画笔
 
-            SelectObject(hdc, hpen);
+            SelectObject(hdc, hpen);//绘制外圆
             Ellipse(hdc, - 100, - 100, 100, 100);
-            hbrush = CreateSolidBrush(RGB(255, 0, 0));
 
+            hbrush = CreateSolidBrush(RGB(255, 0, 0));//画红色的叶片
             SelectObject(hdc, hbrush);
-            fAngle = 2 * PI / nMaxNum * nNum;
+            fAngle = PI / nMaxNum * nNum;
             nCentrex = (int)(50 * cos(fAngle));
             nCentrey = (int)(50 * sin(fAngle));
-            Pie(hdc, nCentrex - 50, nCentrey + 50, nCentrex + 50, nCentrey - 50,
+            Pie(hdc, nCentrex - 50, nCentrey - 50, nCentrex + 50, nCentrey +50,
+                (int)(nCentrex + 50 * cos(fAngle  )),
+                (int)(nCentrey + 50 * sin(fAngle )),
                 (int)(nCentrex + 50 * cos(fAngle + PI )),
-                (int)(nCentrey + 50 * sin(fAngle + PI )),
-                (int)(nCentrex - 50 * cos(fAngle + PI )),
-                (int)(nCentrey - 50 * sin(fAngle + PI )));
+                (int)(nCentrey + 50 * sin(fAngle + PI )));
 
-            hbrush = CreateSolidBrush(RGB(255, 255, 0));
+            hbrush = CreateSolidBrush(RGB(255, 255, 0));//画天蓝色的叶片
             SelectObject(hdc, hbrush);
-            fAngle = 2 * PI / nMaxNum * nNum;
+            //fAngle = PI / nMaxNum * nNum;
             nCentrex = (int)(50 * cos(fAngle+2*PI/3));
             nCentrey = (int)(50 * sin(fAngle+2*PI/3));
-            Pie(hdc, nCentrex - 50, nCentrey + 50, nCentrex + 50, nCentrey - 50,
+            Pie(hdc, nCentrex - 50, nCentrey - 50, nCentrex + 50, nCentrey + 50,
                 (int)(nCentrex + 50 * cos(fAngle + 2 * PI / 3)),
                 (int)(nCentrey + 50 * sin(fAngle + 2 * PI / 3)),
-                (int)(nCentrex - 50 * cos(fAngle + 2 * PI / 3)),
-                (int)(nCentrey - 50 * sin(fAngle + 2 * PI / 3)));
+                (int)(nCentrex + 50 * cos(fAngle + 2 * PI / 3+PI)),
+                (int)(nCentrey + 50 * sin(fAngle + 2 * PI / 3+PI)));
 
-            hbrush = CreateSolidBrush(RGB(0, 255, 255));
+            hbrush = CreateSolidBrush(RGB(0, 255, 255));//画黄色的叶片
             SelectObject(hdc, hbrush);
-            fAngle = 2 * PI / nMaxNum * nNum;
+            //fAngle = PI / nMaxNum * nNum;
             nCentrex = (int)(50 * cos(fAngle + 4 * PI / 3));
             nCentrey = (int)(50 * sin(fAngle + 4 * PI / 3));
-            Pie(hdc, nCentrex - 50, nCentrey + 50, nCentrex + 50, nCentrey - 50,
+            Pie(hdc, nCentrex - 50, nCentrey - 50, nCentrex + 50, nCentrey + 50,
                 (int)(nCentrex + 50 * cos(fAngle + 4 * PI / 3)),
                 (int)(nCentrey + 50 * sin(fAngle + 4 * PI / 3)),
-                (int)(nCentrex - 50 * cos(fAngle + 4 * PI / 3)),
-                (int)(nCentrey - 50 * sin(fAngle + 4 * PI / 3)));
-            nNum++;
-            Sleep(100);
-            InvalidateRect(hWnd, NULL, 1);
-            EndPaint(hWnd, &ps);
+                (int)(nCentrex + 50 * cos(fAngle + 4 * PI / 3+PI)),
+                (int)(nCentrey + 50 * sin(fAngle + 4 * PI / 3+PI)));
+
+            nNum++;//当前序数加一
+            Sleep(100);//等待0.1秒
+            InvalidateRect(hWnd, NULL, 1);//重绘窗口区域
+            EndPaint(hWnd, &ps);//释放环境指针
         }
         break;
     case WM_DESTROY:
